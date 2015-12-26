@@ -15,16 +15,12 @@ import java.util.Map;
 public class LDBoperate {
 	private  DB db;
 	private  String path = "../data/leveldb";
-	private  int num=1;//访问人数包括自己
-	private  LinkedHashMap<String,String> beforeVisit;
+	
 	//构造函数
 	public LDBoperate(){
-		beforeVisit = new LinkedHashMap<String,String>();
+		
 	}
-	//获取num值
-	public int getNum() {
-			return num;
-	}
+	
 	
 	//创建数据库
 	public void create() throws IOException{
@@ -71,32 +67,48 @@ public class LDBoperate {
 	}
 	
 	
-	//查询之前有多少人，返回之前的人以及人的时间，并将这个人的姓名和时间存入 数据库	
-	public LinkedHashMap<String,String> displayPeople(Guest guest) throws IOException{
-			
-		//beforeVisit = new LinkedHashMap<String,String>();
-				//遍历结果集
-		DBIterator iterator = db.iterator();
-		try {
-				num=1;
-				for(iterator.seekToFirst(); iterator.hasNext(); iterator.next()) {
-				String key = asString(iterator.peekNext().getKey());
-				String value = asString(iterator.peekNext().getValue());
-				beforeVisit.put(key,value);
-				num++;
-		}
-				  
-			//将访问者姓名，和日期写入数据库
-				db.put(bytes(guest.getName()), bytes(guest.getTime()));
-				return beforeVisit;
-			
-		} finally {
-			// Make sure you close the iterator to avoid resource leaks.
-				iterator.close();
-		}
-				
+
+	
+	public class Operate{
+		private  int num=1;//访问人数包括自己
+		private  LinkedHashMap<String,String> beforeVisit;
+		//查询之前有多少人，返回之前的人以及人的时间，并将这个人的姓名和时间存入 数据库	
 		
-	}	
+		public Operate(){
+			beforeVisit = new LinkedHashMap<String,String>();
+		}
+		
+		public LinkedHashMap<String,String> displayPeople(Guest guest) throws IOException{
+				
+			//beforeVisit = new LinkedHashMap<String,String>();
+					//遍历结果集
+			DBIterator iterator = db.iterator();
+			try {
+					num=1;
+					for(iterator.seekToFirst(); iterator.hasNext(); iterator.next()) {
+					String key = asString(iterator.peekNext().getKey());
+					String value = asString(iterator.peekNext().getValue());
+					beforeVisit.put(key,value);
+					num++;
+			}
+					  
+				//将访问者姓名，和日期写入数据库
+					db.put(bytes(guest.getName()), bytes(guest.getTime()));
+					return beforeVisit;
+				
+			} finally {
+				// Make sure you close the iterator to avoid resource leaks.
+					iterator.close();
+			}
+					
+			
+		}
+		
+		//获取num值
+		public int getNum() {
+				return num;
+		}
+	}//内部class
 	
 
 }

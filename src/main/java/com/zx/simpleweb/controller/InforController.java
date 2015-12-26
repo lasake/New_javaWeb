@@ -26,11 +26,12 @@ public class InforController {
 				ModelAndView mav = new ModelAndView("information");
 				mav.addObject("guest",guest);
 				LDBoperate ldboperate=JavawebServletContextListener.abc;
+				LDBoperate.Operate operate = ldboperate.new Operate();
 				try {
 					//ldboperate.create();
 					
-						LinkedHashMap<String,String> map=ldboperate.displayPeople(guest);
-						int num=ldboperate.getNum();
+						LinkedHashMap<String,String> map=operate.displayPeople(guest);
+						int num=operate.getNum();
 						mav.addObject("map",map);
 						mav.addObject("num",num);
 					
