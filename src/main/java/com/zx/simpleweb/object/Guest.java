@@ -1,6 +1,8 @@
 package com.zx.simpleweb.object;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -31,5 +33,33 @@ public class Guest {
 		this.time=dateFormat.format( new Date());
 	
 	}
+	//对时间进行比较
+	
 	
 }
+     //@SuppressWarnings("rawtypes")
+class GuestCompaterator implements Comparator<Guest>{
+    	 @Override
+ 		public int compare(Guest o1, Guest o2) {
+ 			// TODO Auto-generated method stub
+    		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-M-d");
+    		 try {
+				Date str1date = fmt.parse(o1.getTime());
+				Date str2date = fmt.parse(o2.getTime());
+				if(str1date.before(str2date)){
+					return 1;
+				}else{
+					return -1;
+				}
+				
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		 return 0;
+    		 
+ 			
+ 		}
+}
+
+		
