@@ -5,6 +5,7 @@ import static org.iq80.leveldb.impl.Iq80DBFactory.*;
 import java.io.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeSet;
 
 /*
  * 用户登录后数据存在这个数据库中
@@ -71,14 +72,14 @@ public class LDBoperate {
 	
 	public class Operate{
 		private  int num=1;//访问人数包括自己
-		private  LinkedHashMap<String,String> beforeVisit;
+		private  TreeSet<Guest> beforeVisit;
 		//查询之前有多少人，返回之前的人以及人的时间，并将这个人的姓名和时间存入 数据库	
 		
 		public Operate(){
-			beforeVisit = new LinkedHashMap<String,String>();
+			beforeVisit = new TreeSet<Guest>(new GuestCompaterator());
 		}
 		
-		public LinkedHashMap<String,String> displayPeople(Guest guest) throws IOException{
+		public TreeSet<Guest> displayPeople(Guest guest) throws IOException{
 				
 			//beforeVisit = new LinkedHashMap<String,String>();
 					//遍历结果集
@@ -86,9 +87,7 @@ public class LDBoperate {
 			try {
 					num=1;
 					for(iterator.seekToFirst(); iterator.hasNext(); iterator.next()) {
-					String key = asString(iterator.peekNext().getKey());
-					String value = asString(iterator.peekNext().getValue());
-					beforeVisit.put(key,value);
+					beforeVisit.add(new Guest(asString(iterator.peekNext().getKey()),asString(iterator.peekNext().getValue())));
 					num++;
 			}
 					  

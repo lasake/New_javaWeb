@@ -17,8 +17,8 @@ hello！<c:out value="${guest.name}"></c:out> !你是第 <c:out value="${num}"><
 </tr>
 <c:forEach var="a" items="${map}">
 <tr align="center">
-<td>${a.key }</td>
-<td>${a.value }</td>
+<td>${a.name }</td>
+<td>${a.time }</td>
 </tr>
 </c:forEach>
 </table>

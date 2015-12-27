@@ -2,6 +2,8 @@ package com.zx.simpleweb.controller;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.TreeSet;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller; 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +32,7 @@ public class InforController {
 				try {
 					//ldboperate.create();
 					
-						LinkedHashMap<String,String> map=operate.displayPeople(guest);
+						TreeSet<Guest> map=operate.displayPeople(guest);
 						int num=operate.getNum();
 						mav.addObject("map",map);
 						mav.addObject("num",num);

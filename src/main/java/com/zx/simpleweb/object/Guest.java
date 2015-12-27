@@ -15,6 +15,14 @@ public class Guest {
 	private String name;
 	private String time;
 	
+	public Guest(){
+	
+	}
+	public Guest(String name,String time)
+	{
+		this.name=name;
+		this.time=time;
+	}
 	public String getName() {
 		return name;
 	}
@@ -33,8 +41,11 @@ public class Guest {
 		this.time=dateFormat.format( new Date());
 	
 	}
-	//对时间进行比较
 	
+	@Override
+	public String toString() {
+	       return this.name+" "+this.time+" ";
+	}
 	
 }
      //@SuppressWarnings("rawtypes")
@@ -42,7 +53,7 @@ class GuestCompaterator implements Comparator<Guest>{
     	 @Override
  		public int compare(Guest o1, Guest o2) {
  			// TODO Auto-generated method stub
-    		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-M-d");
+    		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     		 try {
 				Date str1date = fmt.parse(o1.getTime());
 				Date str2date = fmt.parse(o2.getTime());
@@ -52,10 +63,10 @@ class GuestCompaterator implements Comparator<Guest>{
 					return -1;
 				}
 				
-			} catch (ParseException e) {
+			 } catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			 }
     		 return 0;
     		 
  			
