@@ -27,7 +27,7 @@ public class InforController {
 				guest.setTime();
 				ModelAndView mav = new ModelAndView("information");
 				mav.addObject("guest",guest);
-				LDBoperate ldboperate=JavawebServletContextListener.abc;
+				LDBoperate ldboperate=JavawebServletContextListener.getLdbInstance();
 				LDBoperate.Operate operate = ldboperate.new Operate();
 				try {
 					//ldboperate.create();

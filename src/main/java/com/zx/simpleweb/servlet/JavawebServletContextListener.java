@@ -7,7 +7,7 @@ import com.zx.simpleweb.object.LDBoperate;
 
 public class JavawebServletContextListener implements ServletContextListener {
 
-	public static LDBoperate abc;
+	private static  LDBoperate abc;
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
@@ -18,7 +18,7 @@ public class JavawebServletContextListener implements ServletContextListener {
 			e.printStackTrace();
 		}
 	}
-
+   
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
@@ -29,6 +29,10 @@ public class JavawebServletContextListener implements ServletContextListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static LDBoperate getLdbInstance(){
+		return abc;
 	}
 
 }
